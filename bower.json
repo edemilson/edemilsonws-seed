@@ -1,0 +1,32 @@
+{
+  "name": "edemilsonws-seed",
+  "version": "0.0.1",
+  "description": "seed for angular, express, mongodb and passport",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "authors": [
+    "edemilson.ws"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/edemilson/edemilsonws-seed",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.20",
+    "bootstrap": "~3.2.0",
+    "angular-resource": "~1.2.20",
+    "jquery": "~2.1.1",
+    "angular-cookies": "~1.2.20",
+    "angular-sanitize": "~1.2.20",
+    "angular-route": "~1.2.20",
+    "angular-http-auth": "~1.2.1",
+    "angular-bootstrap": "~0.11.0"
+  }
+}
