@@ -1,0 +1,11 @@
+<h2>Classificados</h2>
+
+<h3>Anuncios</h3>
+{{ anuncios }}
+<ul>
+  <li data-ng-repeat='anuncio in anuncios'>
+    <a href='/ad/{{anuncio._id}}'> 
+      {{ anuncio.name }} - {{ anuncio.category }} - {{ anuncio.alcohol }}
+    </a>
+  </li>
+</ul>

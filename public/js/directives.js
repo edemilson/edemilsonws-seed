@@ -1,10 +1,9 @@
 'use strict';
 
-/* Directives */
+var myAppDirective = angular.module('myApp.directives', []);
 
-angular.module('myApp.directives', []).
-  directive('appVersion', function (version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  });
+myAppDirective.directive('appVersion', ['version', function(version) {
+	return function(scope, elm, attrs) {
+		elm.text(version);
+	};
+}]);

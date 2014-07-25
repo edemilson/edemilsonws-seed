@@ -1,0 +1,17 @@
+<h2>Classificados</h2>
+
+<p> {{msg}} </p>
+
+<h3>Anuncio consultado</h3>
+  <form>
+        <input type='text' data-ng-model='anuncio.name' />
+      <br>
+        <input type='text' data-ng-model='anuncio.value' />
+      <br>
+        <input type='text' data-ng-model='anuncio.category' />
+      <br>
+        <textarea type='text' data-ng-model='anuncio.description'></textarea>
+      <br>
+
+<button data-ng-click='alterar(anuncio)' >Alterar</button>
+<button data-ng-click='deletar(anuncio)' >Deletar</button>

@@ -1,0 +1,23 @@
+<h2>Classificados<h2>
+
+<p> 
+  {{ anuncios }}
+</p>
+  
+<form data-ng-submit='cadastrar(form)'>
+  
+  <label>Titulo</label>
+  <input type='text' data-ng-model='form.name' />
+  
+  <label>Valor</label>
+  <input type='text' data-ng-model='form.value' />
+  
+  <label>Categoria</label>
+  <input type='text' data-ng-model='form.category' />
+  
+  <label>Descrição</label>
+  <textarea type='text' data-ng-model='form.description'></textarea>
+  
+  <input type='submit' value="Salvar" />
+  
+</form>

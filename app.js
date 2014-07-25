@@ -10,6 +10,7 @@ var express = require('express'),
   routes = require('./routes'),
   api = require('./routes/api'),
   partials = require('./routes/partials'),
+  ads = require('./routes/ads'),
   http = require('http'),
   path = require('path');
 
@@ -56,6 +57,18 @@ app.use('/partials', partials);
 
 // Api
 app.use('/api', api);
+
+// Anuncios API
+// criar novo anuncio
+app.post('/api/ads', ads.create);
+// recupera todos os registros
+app.get('/api/ads', ads.retrieve);
+// recupera um unico registro pelo id
+app.get('/api/ads/:id', ads.get);
+// atualiza um registro
+app.put('/api/ads/:id', ads.update);
+// deleta um registro
+app.delete('/api/ads/:id', ads.delete);
 
 // Todas as outras requisicoes serao enviadas para indexs
 app.get('*', function(req, res, next) {
