@@ -1,6 +1,6 @@
 'use strict';
 
-var myAppControllers = angular.module('myApp.controllers', []);
+var myAppControllers = angular.module('myApp.controllers', ['autofields']);
 
 myAppControllers.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
     $http({
@@ -27,22 +27,79 @@ myAppControllers.controller('adController', ['$scope', '$http', '$routeParams', 
     error(function (data, status, headers, config) {
       $scope.anuncios = 'Error!';
     });
+  
+    $scope.novoanuncio = {
+      name: '',
+      value: null,
+      category: null,
+      description: ''
+    };
 
-    $scope.cadastrar = function(form){
-      var url = '/api/ads';
-      var dados = form;
+	$scope.schema = [
+    { property: 'name', label: 'Titulo:', type: 'text', attr: { ngMinlength: 4, required: true }, msgs: {minlength: 'É preciso ter mais de 4 Caracters'} },
+    { property: 'value', label:'Qual o valor:', type: 'number', attr: {min:1}, msgs: {min: 'Não pode ser menor que 1'} },
+    { property: 'category', label: 'Categoria:', type: 'select', list: 'key as value for (key,value) in categorys', attr: {required: true}},
+    { property: 'description', label: 'Descrição:', type: 'textarea', rows: 5, placeholder: 'Fale sobre o que está vendendo'}
+	];
+
+	$scope.options = {
+		validation: {
+			enabled: true
+		},
+		layout: {
+			type: 'basic',
+			labelSize: 3,
+			inputSize: 9
+		}
+	};
+
+	$scope.categorys = {
+		0: 'Venda',
+		1: 'Aluguel',
+    2: 'Temporada'
+	};
+
+	$scope.join = function(){
+		if(!$scope.joinForm.$valid) return;
+		//join stuff....
+    var url = '/api/ads';
+    var dados = $scope.novoanuncio;
+    $http({
+      method: 'POST',
+      url: url,
+      data: dados
+    }).
+    success(function (data, status, headers, config) {
+      $scope.msg = 'Registro adicionado com sucesso!';
+    }).
+    error(function (data, status, headers, config) {
+      $scope.msg = 'Error!';
+    });
+	}
+  
+  $scope.deletar = function(anuncio){
+      var url = '/api/ads/'+anuncio._id;
       $http({
-        method: 'POST',
-        url: url,
-        data: dados
+        method: 'DELETE',
+        url: url
       }).
       success(function (data, status, headers, config) {
-        $scope.msg = data;
+          $http({
+            method: 'GET',
+            url: '/api/ads'
+          }).
+          success(function (data, status, headers, config) {
+            $scope.anuncios = data;
+          }).
+          error(function (data, status, headers, config) {
+            $scope.anuncios = 'Error!';
+          });
       }).
       error(function (data, status, headers, config) {
-        $scope.msg = 'Error!';
+        var msg = 'Error! Auncio não deletado';
+        $scope.anuncio = msg;
       });
-   }
+    }
   
 }]);
 
@@ -61,14 +118,39 @@ myAppControllers.controller('adGetController', ['$scope', '$http', '$routeParams
     error(function (data, status, headers, config) {
       $scope.anuncio = 'Error!';
     });
+  
+    $scope.schema = [
+      { property: 'name', label: 'Titulo:', type: 'text', attr: { ngMinlength: 4, required: true }, msgs: {minlength: 'É preciso ter mais de 4 Caracters'} },
+      { property: 'value', label:'Qual o valor:', type: 'number', attr: {min:1}, msgs: {min: 'Não pode ser menor que 1'} },
+      { property: 'category', label: 'Categoria:', type: 'select', list: 'key as value for (key,value) in categorys', attr: {required: true}},
+      { property: 'description', label: 'Descrição:', type: 'textarea', rows: 5, placeholder: 'Fale sobre o que está vendendo'}
+    ];
 
-    $scope.alterar = function(anuncio){
-      var url = '/api/ads/'+anuncio._id;
+    $scope.options = {
+      validation: {
+        enabled: true
+      },
+      layout: {
+        type: 'basic',
+        labelSize: 3,
+        inputSize: 9
+      }
+    };
+
+    $scope.categorys = {
+      0: 'Venda',
+      1: 'Aluguel',
+      2: 'Temporada'
+    };
+
+    $scope.join = function(){
+      if(!$scope.joinForm.$valid) return;
+      var url = '/api/ads/'+$scope.anuncio._id;
       var dados = {
-        name: anuncio.name,
-        value: anuncio.value,
-        category: anuncio.category,
-        description: anuncio.description,
+        name: $scope.anuncio.name,
+        value: $scope.anuncio.value,
+        category: $scope.anuncio.category,
+        description: $scope.anuncio.description,
       };
 
       $http({
@@ -86,22 +168,6 @@ myAppControllers.controller('adGetController', ['$scope', '$http', '$routeParams
       });
     }
 
-    $scope.deletar = function(anuncio){
-      var url = '/api/ads/'+anuncio._id;
-      $http({
-        method: 'DELETE',
-        url: url
-      }).
-      success(function (data, status, headers, config) {
-        var msg = 'Anuncio deletado';
-        $scope.msg = msg;
-      }).
-      error(function (data, status, headers, config) {
-        var msg = 'Error! Auncio não deletado';
-        $scope.anuncio = msg;
-      });
-    }
-  
 }]);
 
 myAppControllers.controller('MyCtrl1', ['$scope', function($scope){

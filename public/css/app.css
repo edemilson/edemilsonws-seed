@@ -26,3 +26,12 @@
   content: "";
   padding: 0;
 }
+
+.container-app{
+  width: 960px;
+  margin: 0 auto;
+}
+
+.center-footer{
+  text-align: center;
+}

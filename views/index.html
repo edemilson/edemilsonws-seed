@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='/css/app.css' />
   </head>
 <body>
-  <div ng-controller='AppCtrl'>
+  <div class="container-app" ng-controller='AppCtrl'>
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -22,10 +22,10 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href='/view1'>Link 1</a></li>
-            <li><a href='/view2'>Link 2</a></li>
-            <li><a href='/ad'>ad</a></li>
-            <li><a href='/ad/create'>create ad</a></li>
+            <li><a href='/view1'>Página 1</a></li>
+            <li><a href='/view2'>Página 2</a></li>
+            <li><a href='/ad'>Listar Anúncios</a></li>
+            <li><a href='/ad/create'>Cadastrar Anúncio</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -40,12 +40,16 @@
         </div>
       </div>
     </nav>
-    
-    <div ng-view></div>
-
-    <div>
-      | edemilson-ws seed app: v
-      <span app-version></span>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div ng-view></div>
+      </div>
+      <div class="panel-footer">
+        <div class="center-footer">
+           edemilson-ws seed app: v
+          <span app-version></span>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -56,6 +60,8 @@
   <script src="/components/angular-route/angular-route.js"></script>
   <script src="/components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="/components/angular-http-auth/src/http-auth-interceptor.js"></script>
+  <script src="/components/angular-autoFields-bootstrap/autofields.js"></script>
+  <script src="/components/angular-autoFields-bootstrap/autofields-bootstrap.js"></script>
 
   <script src='/js/app.js' ></script>
   <script src='/js/services.js' ></script>

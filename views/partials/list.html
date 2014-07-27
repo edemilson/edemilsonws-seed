@@ -1,11 +1,16 @@
-<h2>Classificados</h2>
-
 <h3>Anuncios</h3>
-{{ anuncios }}
 <ul>
   <li data-ng-repeat='anuncio in anuncios'>
+    <span>Titulo: {{ anuncio.name }}</span><br>
+    <span>Id Categoria: {{ anuncio.category }}</span><br>
+    <span>Valor: {{ anuncio.value }}</span><br>
     <a href='/ad/{{anuncio._id}}'> 
-      {{ anuncio.name }} - {{ anuncio.category }} - {{ anuncio.alcohol }}
+      Editar
     </a>
+    |
+    <a href='' ng-click='deletar(anuncio)'> 
+      Deletar
+    </a>
+    <br><br>
   </li>
 </ul>
